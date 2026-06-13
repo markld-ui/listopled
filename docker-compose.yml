@@ -1,0 +1,80 @@
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    profiles: ["core"]
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - api
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    profiles: ["core"]
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      NUXT_HOST: 0.0.0.0
+      NUXT_PORT: 3000
+      INTERNAL_API_BASE_URL: ${INTERNAL_API_BASE_URL:-http://api:8080/api/v1}
+    expose:
+      - "3000"
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: src/Listopled.Api/Dockerfile
+    profiles: ["core"]
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      ASPNETCORE_URLS: http://+:8080
+      DB_HOST: ${DB_HOST:-db}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_NAME: ${DB_NAME:-listopled}
+      DB_USER: ${DB_USER:-listopled_user}
+      DB_PASSWORD: ${DB_PASSWORD:-change_me_database_password}
+    expose:
+      - "8080"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    profiles: ["core"]
+    environment:
+      POSTGRES_DB: ${DB_NAME:-listopled}
+      POSTGRES_USER: ${DB_USER:-listopled_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-change_me_database_password}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    expose:
+      - "5432"
+
+  redis:
+    image: valkey/valkey:8-alpine
+    profiles: ["cache"]
+    command: ["valkey-server", "--maxmemory", "64mb", "--maxmemory-policy", "allkeys-lru"]
+    expose:
+      - "6379"
+
+  minio:
+    image: minio/minio:latest
+    profiles: ["media"]
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:-change_me_minio_access_key}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:-change_me_minio_secret_key}
+    volumes:
+      - minio-data:/data
+    expose:
+      - "9000"
+      - "9001"
+
+volumes:
+  pgdata:
+  minio-data:

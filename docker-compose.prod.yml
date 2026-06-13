@@ -1,0 +1,35 @@
+services:
+  nginx:
+    volumes:
+      - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    restart: unless-stopped
+
+  frontend:
+    restart: unless-stopped
+
+  api:
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+    restart: unless-stopped
+
+  db:
+    ports: []
+    command:
+      - "postgres"
+      - "-c"
+      - "shared_buffers=128MB"
+      - "-c"
+      - "max_connections=20"
+      - "-c"
+      - "effective_cache_size=256MB"
+    restart: unless-stopped
+
+  redis:
+    ports: []
+    restart: unless-stopped
+
+  minio:
+    ports: []
+    restart: unless-stopped

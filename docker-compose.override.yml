@@ -1,0 +1,30 @@
+services:
+  nginx:
+    ports:
+      - "8080:80"
+
+  frontend:
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+  api:
+    ports:
+      - "5000:8080"
+    volumes:
+      - ./backend:/src
+
+  db:
+    ports:
+      - "5432:5432"
+
+  redis:
+    ports:
+      - "6379:6379"
+
+  minio:
+    ports:
+      - "9000:9000"
+      - "9001:9001"

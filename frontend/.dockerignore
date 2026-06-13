@@ -1,0 +1,15 @@
+.git
+.env
+.env.*
+!.env.example
+*.local
+node_modules/
+.nuxt/
+.output/
+dist/
+.vite/
+coverage/
+logs/
+*.log
+.vscode/
+.idea/
