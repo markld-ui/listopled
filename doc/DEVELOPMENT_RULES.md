@@ -9,6 +9,24 @@
 - Не превращать MVP в маркетплейс.
 - Не реализовывать оплату, корзину и личный кабинет клиента в MVP.
 - Backend остается source of truth для бизнес-логики.
+- Фаза 2 реализуется как `Public Landing + Calculator Conversion Slice`, а не как изолированный калькулятор.
+- Перед каждым шагом Фазы 2 нужен отдельный план с файлами, зависимостями, миграциями, тестами и рисками.
+
+## Декомпозиция Фазы 2
+
+1. Backend infrastructure packages and DI.
+2. Calculator domain entities.
+3. Calculator price calculation service + unit tests.
+4. Calculator EF configurations, seed data and migrations.
+5. Calculator CQRS + backend public API.
+6. Public landing content backend API: site settings, contacts, gallery, testimonials, FAQ.
+7. Nuxt BFF routes for public API.
+8. Frontend design foundation: CSS variables, Tailwind config, базовые UI-компоненты.
+9. Landing page skeleton.
+10. Frontend calculator component.
+11. WhatsApp CTA helper.
+12. Landing conversion polish.
+13. Final checks, docs sync and commit.
 
 ## Когда обновлять документацию
 

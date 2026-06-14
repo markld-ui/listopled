@@ -9,3 +9,5 @@
 - Уточнено ограничение Фазы 1: готовятся только документация и безопасный каркас, без реализации калькулятора, авторизации, админки, аналитики, обращений или публичного продукта.
 - Добавлен безопасный каркас проекта: root ignore/config files, Docker/nginx skeleton, production compose skeleton, backend .NET solution skeleton, frontend Nuxt skeleton и `doc/ADMIN_GUIDE.md`.
 - Усилены ignore-правила для `static/photos`: приватные брендовые материалы исключены из git и Docker build context, оставлены только `.gitkeep` и `README.md`.
+- Уточнена рамка Фазы 2: `Public Landing + Calculator Conversion Slice`, где калькулятор является частью публичного конверсионного пути лендинга, а не изолированной технической фичей.
+- Добавлена декомпозиция Фазы 2 на маленькие будущие шаги от backend infrastructure packages до landing conversion polish и финальной синхронизации документации.

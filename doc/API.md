@@ -65,6 +65,22 @@ POST   /api/v1/public/analytics/events
 GET    /api/v1/public/sitemap.xml
 ```
 
+## Phase 2 public conversion API scope
+
+Фаза 2 использует существующие утвержденные public endpoints как единый conversion slice лендинга:
+
+- `GET /api/v1/public/site-settings` — базовые тексты и настройки публичной страницы.
+- `GET /api/v1/public/contact-settings` — контакты и ссылки для CTA в мессенджеры.
+- `GET /api/v1/public/gallery` — работы/галерея для доверия и выбора референса.
+- `GET /api/v1/public/testimonials` — отзывы и социальное доказательство.
+- `GET /api/v1/public/faq` — ответы на вопросы перед обращением.
+- `GET /api/v1/public/calculator/options` — справочники калькулятора.
+- `POST /api/v1/public/calculator/quote` — предварительный расчет цены на backend.
+
+Калькулятор не должен становиться отдельным публичным продуктом вне лендинга. Его API используется в связке: контент → работы → расчет → CTA → обращение к мастеру.
+
+`POST /api/v1/public/inquiries` остается утвержденной точкой для будущей связки с формой обращения, но полноценная реализация обращений относится к отдельному следующему срезу.
+
 ## Admin backend endpoints
 
 ```text

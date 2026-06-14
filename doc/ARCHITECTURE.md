@@ -82,6 +82,34 @@ frontend/src/
 
 Nuxt server routes являются BFF-слоем. Они нужны для скрытия backend API, SSR, same-domain UX, работы с httpOnly cookies и уменьшения прямого сканирования ASP.NET endpoints.
 
+## Phase 2 public conversion slice
+
+Фаза 2 строится как `Public Landing + Calculator Conversion Slice`, а не как отдельный backend-калькулятор.
+
+Архитектурный поток Фазы 2:
+
+```text
+Публичная главная страница Nuxt
+  ↓
+Nuxt BFF routes
+  ↓
+ASP.NET public API
+  ↓
+PostgreSQL seed/config data
+```
+
+В этот срез входят:
+
+- backend инфраструктура для DI и будущих CQRS handlers;
+- доменная логика расчета цены на backend;
+- public API для настроек сайта, контактов, галереи, отзывов, FAQ и калькулятора;
+- Nuxt BFF routes, которые не добавляют бизнес-логику;
+- frontend foundation и skeleton лендинга;
+- frontend calculator component как часть публичного conversion flow;
+- CTA helper для перехода в мессенджеры после расчета.
+
+Backend остается source of truth для цены и бизнес-правил. Frontend может показывать результат, подсказки и CTA, но не становится источником истины для расчета.
+
 ## Кэш и файлы
 
 Кэш через `ICacheService` не является обязательным для бизнес-корректности. Если Valkey недоступен, система работает с БД.
