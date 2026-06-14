@@ -93,6 +93,20 @@
 - `BaseAmount numeric(12,2) not null`.
 - `UpdatedByAdminUserId uuid null references AdminUsers(Id)`.
 
+## Calculator persistence strategy
+
+В calculator persistence входят таблицы:
+
+- `BlanketSizes`;
+- `Fabrics`;
+- `LeafShapes`;
+- `Discounts`;
+- `PriceCalculationSettings`.
+
+Таблица `PriceQuotes` в MVP не создается.
+
+`PriceQuote` остается доменной моделью/snapshot предварительного расчета и не маппится в EF. При будущем `SubmitInquiry` backend пересчитывает цену и сохраняет snapshot выбранных параметров и рассчитанной цены внутри `Inquiry`.
+
 ## GalleryItems
 
 - `Id uuid primary key`.

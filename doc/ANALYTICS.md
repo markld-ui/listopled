@@ -30,6 +30,7 @@ admin_inquiry_status_changed
 - Аналитику можно отключить через env.
 - События не должны ломать UX, если аналитика временно недоступна.
 - `POST public/analytics/events` ограничивать батчами и частотой.
+- Незавершенные расчеты учитываются через `AnalyticsEvent`, например `calculator_started` и `calculator_completed`, без персональных данных.
 
 ## Admin dashboard
 
