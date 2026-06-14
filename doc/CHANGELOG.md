@@ -16,3 +16,5 @@
 - Добавлен `xunit.runner.visualstudio` как минимальный adapter для обнаружения xUnit v3 tests через `dotnet test`.
 - Добавлены доменные сущности калькулятора для шага 2.2: `BlanketSize`, `Fabric`, `LeafShape`, `Discount`, `PriceCalculationSettings`, `PriceQuote`, `DomainException` и unit tests доменных инвариантов.
 - Зафиксировано, что EF configurations, migrations, seed data, CQRS, API endpoints и frontend на шаге 2.2 не реализуются.
+- Добавлен чистый доменный `PriceCalculatorService` для шага 2.3 с расчетом `F + T * R + B - I`, проверкой активных опций, обнулением отрицательного итога и unit tests, включая обязательный пример `7500 ₽`.
+- Зафиксировано, что EF configurations, migrations, seed data, CQRS, API endpoints и frontend на шаге 2.3 не реализуются.
