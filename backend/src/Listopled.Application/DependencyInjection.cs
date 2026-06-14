@@ -1,9 +1,19 @@
 namespace Listopled.Application;
 
+using System.Reflection;
+using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
+
 public static class DependencyInjection
 {
-    public static void AddApplicationPlaceholder()
+    public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        // Placeholder for Phase 1 only. Real MediatR/validation wiring comes in feature phases.
+        Assembly assembly = typeof(DependencyInjection).Assembly;
+
+        services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly(assembly));
+        services.AddValidatorsFromAssembly(assembly);
+        services.AddAutoMapper(_ => { }, assembly);
+
+        return services;
     }
 }

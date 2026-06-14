@@ -1,12 +1,22 @@
+using Listopled.Application;
+using Listopled.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 
-Listopled.Application.DependencyInjection.AddApplicationPlaceholder();
-Listopled.Infrastructure.DependencyInjection.AddInfrastructurePlaceholder();
-
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.MapControllers();
 app.MapHealthChecks("/health");

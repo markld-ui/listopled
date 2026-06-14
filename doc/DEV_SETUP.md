@@ -9,6 +9,16 @@
 - Docker Desktop или Docker Engine.
 - Git.
 
+## .NET SDK
+
+В корне проекта есть `global.json`, который фиксирует SDK:
+
+```text
+10.0.201
+```
+
+Локально также может быть установлен preview SDK, но проект должен собираться через зафиксированный SDK, если он доступен.
+
 ## Планируемый запуск
 
 Полный dev stack:
@@ -61,3 +71,5 @@ password: Admin123!
 ## Документация API
 
 В Development OpenAPI UI доступен. В Production недоступен и должен возвращать `404`.
+
+Для backend используется Swashbuckle. Scalar и NSwag пока не подключаются.

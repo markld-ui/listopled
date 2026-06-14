@@ -1,9 +1,15 @@
 namespace Listopled.Infrastructure;
 
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
 public static class DependencyInjection
 {
-    public static void AddInfrastructurePlaceholder()
+    public static IServiceCollection AddInfrastructure(
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
-        // Placeholder for Phase 1 only. Real persistence/cache/storage wiring comes later.
+        _ = configuration;
+        return services;
     }
 }

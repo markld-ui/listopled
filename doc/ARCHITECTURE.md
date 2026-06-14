@@ -58,6 +58,25 @@ PostgreSQL / Valkey / MinIO
 
 Используются Controllers, не Minimal APIs.
 
+## Backend infrastructure dependencies
+
+Шаг 2.1-B подключает базовую backend-инфраструктуру без бизнес-логики калькулятора:
+
+- Central Package Management через `Directory.Packages.props`;
+- `global.json` фиксирует .NET SDK `10.0.201`, чтобы сборка не выбирала preview SDK случайно;
+- `Listopled.Application` регистрирует MediatR, FluentValidation validators и AutoMapper profiles через assembly scanning;
+- `Listopled.Infrastructure` содержит extension method для будущего подключения persistence/configuration;
+- `Listopled.Api` подключает Application и Infrastructure DI;
+- OpenAPI через Swashbuckle доступен только в `Development`.
+- тестовые проекты используют xUnit v3 и `xunit.runner.visualstudio` как минимальный адаптер для discovery через `dotnet test`.
+
+Отложено:
+
+- Serilog — отдельный logging/security шаг;
+- `Microsoft.EntityFrameworkCore.Design` — шаг миграций;
+- `Microsoft.AspNetCore.Mvc.Testing` и `Testcontainers.PostgreSql` — когда появятся реальные API endpoints и integration tests;
+- mocking framework — пока ближайшие unit tests должны обходиться без моков.
+
 ## Frontend
 
 Nuxt 3 структура:

@@ -15,6 +15,10 @@
 11. `npm install` для frontend skeleton сообщил о 6 high severity vulnerabilities в транзитивных зависимостях; `npm audit fix` не запускался, чтобы не менять dependency graph без отдельного решения.
 12. `static/photos` считается локальным приватным хранилищем брендовых материалов. Реальные фото, логотипы, Figma-материалы, исходники и дизайн-референсы не коммитятся и не отправляются в Docker build context; для публичного использования изображения нужно отдельно отобрать, оптимизировать и перенести в публичную директорию frontend или загрузить в MinIO/S3.
 13. Фаза 2 трактуется как `Public Landing + Calculator Conversion Slice`: пользовательский путь включает лендинг, работы/галерею, доверие, предварительный расчет, CTA в мессенджеры и подготовку связки с обращением. Калькулятор не реализуется как отдельная от лендинга фича.
+14. Для шага 2.1-B выбран SDK `10.0.201` в `global.json`, потому что он доступен локально и менее рискован, чем доступный `10.0.300-preview...`.
+15. Serilog, `Microsoft.EntityFrameworkCore.Design`, `Microsoft.AspNetCore.Mvc.Testing`, `Testcontainers.PostgreSql` и mocking framework отложены до отдельных шагов, где они станут необходимы.
+16. Калькулятор, calculator entities, migrations, seed data и public API endpoints в шаге 2.1-B не реализуются.
+17. Для xUnit v3 добавлен `xunit.runner.visualstudio` как минимальный test adapter: без него `dotnet test` собирал проекты, но не обнаруживал smoke test.
 
 ## Вопросы перед реализацией
 

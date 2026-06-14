@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit.runner.visualstudio">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="xunit.v3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\Listopled.Api\Listopled.Api.csproj" />
     <ProjectReference Include="..\..\src\Listopled.Application\Listopled.Application.csproj" />
     <ProjectReference Include="..\..\src\Listopled.Infrastructure\Listopled.Infrastructure.csproj" />
