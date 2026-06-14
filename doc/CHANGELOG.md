@@ -14,3 +14,5 @@
 - Добавлен backend infrastructure foundation для шага 2.1-B: Central Package Management, `global.json`, утвержденные NuGet package references, basic Application/Infrastructure DI, Swashbuckle только для Development и минимальные smoke tests.
 - Зафиксировано, что Serilog, EF Design, Testcontainers/WebApplicationFactory и mocking framework отложены; калькулятор, migrations, seed data и public API endpoints не реализованы.
 - Добавлен `xunit.runner.visualstudio` как минимальный adapter для обнаружения xUnit v3 tests через `dotnet test`.
+- Добавлены доменные сущности калькулятора для шага 2.2: `BlanketSize`, `Fabric`, `LeafShape`, `Discount`, `PriceCalculationSettings`, `PriceQuote`, `DomainException` и unit tests доменных инвариантов.
+- Зафиксировано, что EF configurations, migrations, seed data, CQRS, API endpoints и frontend на шаге 2.2 не реализуются.

@@ -19,6 +19,7 @@
 15. Serilog, `Microsoft.EntityFrameworkCore.Design`, `Microsoft.AspNetCore.Mvc.Testing`, `Testcontainers.PostgreSql` и mocking framework отложены до отдельных шагов, где они станут необходимы.
 16. Калькулятор, calculator entities, migrations, seed data и public API endpoints в шаге 2.1-B не реализуются.
 17. Для xUnit v3 добавлен `xunit.runner.visualstudio` как минимальный test adapter: без него `dotnet test` собирал проекты, но не обнаруживал smoke test.
+18. `PriceQuote` на шаге 2.2 реализован как доменная сущность результата предварительного расчета, без персональных данных клиента, заказа и оплаты. Persistence/schema для `PriceQuote` будет уточняться отдельно на шаге EF configurations/migrations.
 
 ## Вопросы перед реализацией
 
@@ -30,6 +31,7 @@
 - Утвердить `inquiries` как единый термин для BFF routes или оставить часть BFF routes с `leads`?
 - Какие реальные тексты, фотографии и блоки доверия использовать в первом публичном лендинге Фазы 2?
 - Какой CTA считать основным после расчета: WhatsApp, Telegram, VK или универсальный выбор мессенджера?
+- Нужно ли хранить `PriceQuote` отдельной таблицей или использовать его только как доменную модель результата расчета внутри обращения?
 
 ## Критичные решения
 
