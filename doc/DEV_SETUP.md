@@ -68,6 +68,10 @@ password: Admin123!
 - analytics;
 - SMTP.
 
+Backend persistence использует PostgreSQL connection string из `ConnectionStrings:DefaultConnection`. Если она не задана или равна placeholder `ConfiguredByEnvironment`, `Listopled.Infrastructure` собирает connection string из `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`.
+
+Реальные секреты не должны попадать в `appsettings*.json` или git. Для production используются environment variables / secret storage.
+
 ## Документация API
 
 В Development OpenAPI UI доступен. В Production недоступен и должен возвращать `404`.

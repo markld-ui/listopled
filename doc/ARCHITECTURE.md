@@ -42,9 +42,8 @@ PostgreSQL / Valkey / MinIO
 
 `Listopled.Domain` содержит entities, value objects, enums, domain services и доменные правила без зависимостей от EF и ASP.NET.
 
-`Listopled.Application` содержит CQRS commands, queries, handlers, DTO, validators, AutoMapper profiles и интерфейсы:
+`Listopled.Application` содержит CQRS commands, queries, handlers, DTO, validators, AutoMapper profiles и интерфейсы будущих integration boundaries:
 
-- `IApplicationDbContext`;
 - `ICurrentUserService`;
 - `ICacheService`;
 - `IFileStorageService`;
@@ -52,7 +51,9 @@ PostgreSQL / Valkey / MinIO
 - `IPaymentProvider`;
 - `IAnalyticsService`.
 
-`Listopled.Infrastructure` содержит EF Core DbContext, configurations, migrations, seed data, Valkey cache, MinIO/local storage, SMTP, payment stub и analytics persistence.
+На текущем этапе `Listopled.Application` не зависит от EF Core. EF Core находится только в `Listopled.Infrastructure`. Доступ Application к данным будет уточнён отдельным шагом перед реализацией CQRS.
+
+`Listopled.Infrastructure` содержит EF Core DbContext, configurations, future migrations/seed data, Valkey cache, MinIO/local storage, SMTP, payment stub и analytics persistence.
 
 `Listopled.Api` содержит controllers, middleware, auth, OpenAPI config, exception handling, rate limiting, security headers, health checks и `Program.cs`.
 
@@ -76,6 +77,18 @@ PostgreSQL / Valkey / MinIO
 - `Microsoft.EntityFrameworkCore.Design` — шаг миграций;
 - `Microsoft.AspNetCore.Mvc.Testing` и `Testcontainers.PostgreSql` — когда появятся реальные API endpoints и integration tests;
 - mocking framework — пока ближайшие unit tests должны обходиться без моков.
+
+## Calculator persistence wiring
+
+Шаг 2.4-B1 добавляет только EF Core wiring для справочников и настроек калькулятора:
+
+- `AppDbContext` находится в `Listopled.Infrastructure`;
+- `DbSet` добавлены для `BlanketSize`, `Fabric`, `LeafShape`, `Discount`, `PriceCalculationSettings`;
+- EF configurations находятся в `Listopled.Infrastructure/Persistence/Configurations`;
+- configurations подключаются через `ApplyConfigurationsFromAssembly`;
+- connection string берется из `ConnectionStrings:DefaultConnection` или `DB_*` environment variables.
+
+`PriceQuote` не добавляется в `DbSet`, не имеет EF configuration и не создаёт отдельную таблицу в MVP.
 
 ## Frontend
 

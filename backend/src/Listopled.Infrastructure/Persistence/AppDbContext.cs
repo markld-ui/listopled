@@ -1,6 +1,24 @@
 namespace Listopled.Infrastructure.Persistence;
 
-public sealed class AppDbContext
+using Listopled.Domain.Calculator;
+using Microsoft.EntityFrameworkCore;
+
+public sealed class AppDbContext : DbContext
 {
-    // Phase 1 skeleton placeholder. EF Core DbContext inheritance is added with persistence setup.
+    public AppDbContext(DbContextOptions<AppDbContext> options)
+        : base(options)
+    {
+    }
+
+    public DbSet<BlanketSize> BlanketSizes => Set<BlanketSize>();
+    public DbSet<Fabric> Fabrics => Set<Fabric>();
+    public DbSet<LeafShape> LeafShapes => Set<LeafShape>();
+    public DbSet<Discount> Discounts => Set<Discount>();
+    public DbSet<PriceCalculationSettings> PriceCalculationSettings => Set<PriceCalculationSettings>();
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        base.OnModelCreating(modelBuilder);
+    }
 }

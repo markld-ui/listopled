@@ -19,3 +19,4 @@
 - Добавлен чистый доменный `PriceCalculatorService` для шага 2.3 с расчетом `F + T * R + B - I`, проверкой активных опций, обнулением отрицательного итога и unit tests, включая обязательный пример `7500 ₽`.
 - Зафиксировано, что EF configurations, migrations, seed data, CQRS, API endpoints и frontend на шаге 2.3 не реализуются.
 - Утверждена persistence strategy калькулятора: справочники и настройки хранятся в БД, `PriceQuotes` table не создается в MVP, расчет сохраняется только как snapshot внутри будущего `Inquiry`.
+- Добавлен шаг 2.4-B1: `AppDbContext`, `DbSet` и EF configurations для calculator catalogs/settings в `Listopled.Infrastructure`; `Listopled.Application` остается без EF Core, `PriceQuote` не маппится, migrations и seed data не созданы.

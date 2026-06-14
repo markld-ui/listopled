@@ -23,6 +23,8 @@
 19. В шаге 2.3 скидка, превышающая сумму `F + T * R + B`, обнуляет итоговую предварительную цену. Отрицательная цена не возвращается пользователю и не сохраняется.
 20. В MVP `PriceQuote` не маппится в EF и не имеет отдельной таблицы, несмотря на то, что в domain layer сейчас выглядит как entity/snapshot.
 21. Если `PriceQuote` начнет путать persistence-модель, позже можно отдельным рефакторингом превратить его в value object / result model без `BaseEntity`.
+22. На шаге 2.4-B1 `Listopled.Application` не зависит от EF Core. EF Core, `AppDbContext`, `DbSet` и configurations находятся только в `Listopled.Infrastructure`.
+23. Доступ `Listopled.Application` к данным будет уточнён отдельным шагом перед CQRS: repository/query abstractions, read services, application interfaces без прямого `DbSet<>` или отдельно утверждённый `IApplicationDbContext`.
 
 ## Вопросы перед реализацией
 

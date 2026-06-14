@@ -97,15 +97,17 @@
 
 В calculator persistence входят таблицы:
 
-- `BlanketSizes`;
-- `Fabrics`;
-- `LeafShapes`;
-- `Discounts`;
-- `PriceCalculationSettings`.
+- `blanket_sizes`;
+- `fabrics`;
+- `leaf_shapes`;
+- `discounts`;
+- `price_calculation_settings`.
 
 Таблица `PriceQuotes` в MVP не создается.
 
 `PriceQuote` остается доменной моделью/snapshot предварительного расчета и не маппится в EF. При будущем `SubmitInquiry` backend пересчитывает цену и сохраняет snapshot выбранных параметров и рассчитанной цены внутри `Inquiry`.
+
+На шаге 2.4-B1 добавлены только `DbSet` и EF configurations для этих пяти таблиц. Seed data и migrations будут отдельным шагом.
 
 ## GalleryItems
 
